@@ -176,21 +176,15 @@ UOpenFiles::openFile(TArray<FString>& outFilenames) {
 
   USoundWave* soundWave = NewObject<USoundWave>(USoundWave::StaticClass());
   if (!(soundWave)) {
-    uint32 error = ::CommDlgExtendedError();
-    if (error != ERROR_SUCCESS) {
-      UE_LOG(LogTemp, Warning, TEXT("Failed to create USoundWave object"), error);
-      return;
-    }
+    UE_LOG(LogTemp, Warning, TEXT("Failed to create USoundWave object"));
+    return;
   }
 
   FBitReader reader(rawFileData.GetData(), rawFileData.Num());
   soundWave->Serialize(reader);
   if (reader.GetError()) {
-    uint32 error = ::CommDlgExtendedError();
-    if (error != ERROR_SUCCESS) {
-      UE_LOG(LogTemp, Warning, TEXT("Failed to serialize USoundWave object"), error);
-      return;
-    }
+    UE_LOG(LogTemp, Warning, TEXT("Failed to serialize USoundWave object"));
+    return;
   }
 
   UWorld* world = nullptr;
@@ -199,10 +193,7 @@ UOpenFiles::openFile(TArray<FString>& outFilenames) {
     audioCompo->Play();
   }
   else {
-    uint32 error = ::CommDlgExtendedError();
-    if (error != ERROR_SUCCESS) {
-      UE_LOG(LogTemp, Warning, TEXT("Failed to spawn UAudioComponent object"), error);
-      return;
-    }
+    UE_LOG(LogTemp, Warning, TEXT("Failed to spawn UAudioComponent object"));
+    return;
   }
 }
