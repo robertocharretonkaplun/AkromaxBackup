@@ -16,6 +16,14 @@
 class UAssetImportTask;
 class UFactory;
 
+//Flag Enum for save multiple or single files
+UENUM(BlueprintType)
+enum 
+dialogFlags {
+  e_single = 0x00, //No flags
+  e_multiple = 0x01 //Allow multiple file selections
+};
+
 /**
  * 
  */
@@ -23,7 +31,6 @@ UCLASS()
 class AKROMAXVISUALIZER_API UOpenFiles : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 public:
-
   /*
   * @brief Allows the display of the windows file explorer
   
@@ -37,87 +44,10 @@ public:
            the names of the files selected by the user.
   */
   UFUNCTION(BlueprintCallable, Category = "Akromax Open Files")
-	static bool 
-  openFileDialog(const FString& dialogTitle, 
-                 const FString& fileTypes,
-                 TArray<FString>& outFilenames);
-
-  /*
-  * @brief Allows the display of the windows file explorer
-  
-  * @param It is the title of the dialog window
-  
-  * @param It is the default path that is displayed 
-           when the file selection dialog window is opened
-
-  * @param Used to store the folder path selected by the user
-  */
-  UFUNCTION(BlueprintCallable, Category = "Akromax Open Files")
   static bool 
-  selectFolderDialog(const FString& dialogTitle, 
-                     const FString& defaultPath, 
-                     FString& outFolderName);
-
-  /*
-  * @brief 
-
-  * @param 
-  * @param
-  * @param
-  * @param
-  * @param
-  * @param
-  */
-  UFUNCTION(BlueprintCallable, Category = "Akromax Open Files")
-  static UAssetImportTask*
-  createImportTask(FString& sourcePath,
-                   FString& destinationPath,
-                   bool& isSuccess,
-                   FString& outInfoMsg);
-  
-
-  /*
-  * @brief
-
-  * @param
-  * @param
-  * @param
-  */
-  UFUNCTION(BlueprintCallable, Category = "Akromax Open Files")
-  static void
-  processImportTask(UAssetImportTask* importTask,
-                    bool& isSuccess,
-                    FString& outInfoMsg);
-
-  /*
-  * @brief
-
-  * @param
-  * @param
-  * @param
-  */
-  UFUNCTION(BlueprintCallable, Category = "Akromax Open Files")
-  static UObject* 
-  importAsset(FString& sourcePath,
-              FString& destinationPath,
-              bool& isSuccess,
-              FString& outInfoMsg);
-
+  openFileDialog(const FString& dialogTitle,
+                 const FString& fileTypes, 
+                 const int32 flags,
+                 TArray<FString>& outFilenames, 
+                 int32& outFilterIndex);
 };
-
-/* Agregar al "Nombre del proyecto".Build.cs
-* PrivateDependencyModuleNames.AddRange(new string[] { 
-		  //Default modules
-			"Core",
-			"CoreUObject",
-			"Engine",
-
-			//New Modules
-			"Json",
-			"JsonUtilities",
-
-			//
-			"AssetTools",
-			"UnrealED",
-		});
-*/
