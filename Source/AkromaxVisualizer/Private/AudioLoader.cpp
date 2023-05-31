@@ -2,8 +2,7 @@
 
 
 #include "AudioLoader.h"
-
-#include "AudioLoader.h"
+#include "Misc/FileHelper.h"
 #include "AudioDevice.h"
 
 void UAudioLoader::LoadAudioFile(FString FilePath, TArray<uint8>& OutData, int32& OutSampleRate)
