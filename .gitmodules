@@ -1,0 +1,6 @@
+[submodule "Plugins/RuntimeAudioImporter"]
+	path = Plugins/RuntimeAudioImporter
+	url = https://github.com/gtreshchev/RuntimeAudioImporter.git
+[submodule "Plugins/vc-ue-extensions"]
+	path = Plugins/vc-ue-extensions
+	url = https://github.com/microsoft/vc-ue-extensions.git
